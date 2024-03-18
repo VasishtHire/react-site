@@ -1,46 +1,63 @@
-import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css';
-// import './css/style.css';
-// import './css/animate.css';
-// import './css/bootstrap.css';
-// import './css/bootstrap-datepicker.css';
-// import './css/aos.css';
-// import './css/fancybox.min.css';
-// import './css/flaticon.css';
-// import './css/icomoon.css';
-// import './css/jquery.timepicker.css';
-// import './css/magnific-popup.css';
-// import './css/open-iconic-bootstrap.min.css';
-// import './css/owl.carousel.min.css';
-// import './css/owl.theme.default.min.css';
-// import './css/ionicons.min.css';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
-function Navbar() {
+function navbar() {
   return (
     <>
-    <nav className="nav">
-        <div className="container">
-            <div className="logo">
-                <a href="#">Your Logo</a>
-            </div>
-            <div id="mainListDiv" className="main_list">
-                <ul className="navlinks">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <span className="navTrigger">
-                <i></i>
-                <i></i>
-                <i></i>
-            </span>
-        </div>
-    </nav>
-    </>  
-    )
+      {[ 'sm', ].map((expand) => (
+        <Navbar key={expand} expand={expand} className="bg-body-tertiary mb-3">
+          <Container fluid>
+            <Navbar.Brand href="#">Navbar Offcanvas</Navbar.Brand>
+            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
+            <Navbar.Offcanvas
+              id={`offcanvasNavbar-expand-${expand}`}
+              aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
+              placement="end"
+            >
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
+                  Offcanvas
+                </Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                <Nav className="justify-content-end flex-grow-1 pe-3">
+                  <Nav.Link href="#action1">Home</Nav.Link>
+                  <Nav.Link href="#action2">Link</Nav.Link>
+                  <NavDropdown
+                    title="Dropdown"
+                    id={`offcanvasNavbarDropdown-expand-${expand}`}
+                  >
+                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
+                    <NavDropdown.Item href="#action4">
+                      Another action
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#action5">
+                      Something else here
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Nav>
+                <Form className="d-flex">
+                  <Form.Control
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                  />
+                  <Button variant="outline-success">Search</Button>
+                </Form>
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+          </Container>
+        </Navbar>
+      ))}
+    </>
+  );
 }
 
-export default Navbar
+export default navbar;
